@@ -3,7 +3,6 @@
 #include <iostream>
 int initialMouseX = 0;
 int initialMouseY = 0;
-
 int size = 56;
 SDL_Rect figures[32];
 int board[8][8] = {
@@ -16,35 +15,27 @@ int board[8][8] = {
     {6, 6, 6, 6, 6, 6, 6, 6},
     {1, 2, 3, 4, 5, 3, 2, 1}
 };
-
 SDL_Window* window;
 SDL_Renderer* renderer;
 SDL_Texture* gBoardTexture = NULL;
 SDL_Texture* gChessTexture = NULL;
-
 int selectedPieceIndex = -1;
 bool quit;
 bool isMousePressed = false;
-
 bool isPositionInsideRect(int x, int y, const SDL_Rect& rect) {
     return (x >= rect.x && x < rect.x + rect.w && y >= rect.y && y < rect.y + rect.h);
 }
-
 void handlePieceMovement(int mouseX, int mouseY) {
     if (selectedPieceIndex != -1) {
         figures[selectedPieceIndex].x = mouseX - size / 2;
         figures[selectedPieceIndex].y = mouseY - size / 2;
     }
 }
-
 bool isValidMove(int startRow, int startCol, int targetRow, int targetCol) {
-    // Check if the target position is within the chessboard boundaries
     return (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol < 8);
 }
-
 void loadPosition() {
     int k = 0;
-
     for (int i = 0; i < 8; i++)
         for (int j = 0; j < 8; j++) {
             int n = board[i][j];
@@ -72,9 +63,7 @@ int main(int argc, char* argv[]) {
     gBoardTexture = SDL_CreateTextureFromSurface(renderer, boardSurface);
     SDL_FreeSurface(boardSurface);
     gChessTexture = IMG_LoadTexture(renderer, "images/figures.png");
-
     bool quit = false;
-
     while (!quit) {
         SDL_Event event;
         while (SDL_PollEvent(&event) != 0) {
@@ -85,9 +74,6 @@ int main(int argc, char* argv[]) {
                     for (int i = 0; i < 32; i++) {
                         if (isPositionInsideRect(event.button.x, event.button.y, figures[i])) {
                             selectedPieceIndex = i;
-
-                            // Store the initial mouse position when selecting a piece
-                            // (Assuming a valid piece is selected)
                             initialMouseX = event.button.x;
                             initialMouseY = event.button.y;
                             break;
@@ -97,21 +83,14 @@ int main(int argc, char* argv[]) {
             } else if (event.type == SDL_MOUSEBUTTONUP) {
                 if (event.button.button == SDL_BUTTON_LEFT) {
                     if (selectedPieceIndex != -1) {
-                        // Calculate the board coordinates for the initial mouse position
                         int startCol = (initialMouseX - 23) / size;
                         int startRow = (initialMouseY - 23) / size;
-
-                        // Calculate the board coordinates for the target mouse position
                         int targetCol = (event.button.x - 23) / size;
                         int targetRow = (event.button.y - 23) / size;
-
-                        // Update the board only if the move is valid
                         if (isValidMove(startRow, startCol, targetRow, targetCol)) {
                             board[targetRow][targetCol] = board[startRow][startCol];
                             board[startRow][startCol] = 0;
                         }
-
-                        // Clear the selection
                         selectedPieceIndex = -1;
                     }
                 }
@@ -125,7 +104,6 @@ int main(int argc, char* argv[]) {
         loadPosition();
         SDL_RenderPresent(renderer);
     }
-
     SDL_DestroyTexture(gBoardTexture);
     SDL_DestroyTexture(gChessTexture);
     SDL_DestroyRenderer(renderer);
