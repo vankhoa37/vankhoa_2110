@@ -2,23 +2,20 @@
 #include <SDL_image.h>
 #include <iostream>
 
-// Kích thước cửa sổ
-const int SCREEN_WIDTH = 800;
+const int SCREEN_WIDTH = 600;
 const int SCREEN_HEIGHT = 600;
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
-SDL_Texture* gTexture = NULL;
-
-// Vị trí của hình ảnh
-int imageX = 0;
-int imageY = 0;
-
-// Kiểm tra xem có đang giữ chuột không
+SDL_Texture* gBoardTexture = NULL; 
+SDL_Texture* gFiguresTexture = NULL;  
+int imageX = 38;
+int imageY = 38;
 bool isMousePressed = false;
 
-void initSDL() {
+const int size = 56;
 
+void initSDL() {
     gWindow = SDL_CreateWindow("Drag Image with SDL2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -26,13 +23,17 @@ void initSDL() {
 }
 
 void loadMedia() {
-    SDL_Surface* loadedSurface = IMG_Load("figures.png");
-    gTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
-    SDL_FreeSurface(loadedSurface);
+    SDL_Surface* boardSurface = IMG_Load("board.png");
+    gBoardTexture = SDL_CreateTextureFromSurface(gRenderer, boardSurface);
+   SDL_FreeSurface(boardSurface);
+    SDL_Surface* figuresSurface = IMG_Load("figures.png");
+    gFiguresTexture = SDL_CreateTextureFromSurface(gRenderer, figuresSurface);
+    SDL_FreeSurface(figuresSurface);
 }
 
 void closeSDL() {
-    SDL_DestroyTexture(gTexture);
+    SDL_DestroyTexture(gBoardTexture);
+    SDL_DestroyTexture(gFiguresTexture);
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
     IMG_Quit();
@@ -44,6 +45,7 @@ int main(int argc, char* args[]) {
     loadMedia();
     bool quit = false;
     SDL_Event e;
+
     while (!quit) {
         while (SDL_PollEvent(&e) != 0) {
             if (e.type == SDL_QUIT) {
@@ -63,12 +65,16 @@ int main(int argc, char* args[]) {
                 }
             }
         }
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
         SDL_RenderClear(gRenderer);
-        SDL_Rect renderQuad = { imageX, imageY, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
-        SDL_RenderCopy(gRenderer, gTexture, NULL, &renderQuad);
+        SDL_RenderCopy(gRenderer, gBoardTexture, NULL, NULL);
+        SDL_Rect figureRect = { imageX, imageY, size, size };
+        SDL_Rect sourceRect = { 0, 0, size, size };
+        SDL_Rect destinationRect = { imageX, imageY, size, size };
+        SDL_RenderCopy(gRenderer, gFiguresTexture, &sourceRect, &destinationRect);
         SDL_RenderPresent(gRenderer);
     }
+
     closeSDL();
     return 0;
 }
