@@ -18,6 +18,8 @@ int board[8][8] = {
 
 SDL_Window* window;
 SDL_Renderer* renderer;
+SDL_Texture* gBoardTexture = NULL;
+SDL_Texture* gChessTexture = NULL;
 
 void loadPosition()
 {
@@ -32,22 +34,27 @@ void loadPosition()
             int chessHeight = 56;
             int chessX = (abs(n) - 1) * chessWidth;
             int chessY = (n > 0 ? 1 : 0) * chessHeight;
-            figures[k].x = size * j;
-            figures[k].y = size * i;
+            figures[k].x = size * j+23;
+            figures[k].y = size * i+23;
             figures[k].w = size;
             figures[k].h = size;
 
             SDL_Rect sourceRect = { chessX, chessY, chessWidth, chessHeight };
-            SDL_RenderCopy(renderer, chessTexture, &sourceRect, &figures[k]);
+            SDL_RenderCopy(renderer, gChessTexture, &sourceRect, &figures[k]);
             k++;
         }
 }
+
 int main(int argc, char* argv[])
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    window = SDL_CreateWindow("The Chess", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 453, 453, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("The Chess", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 453+46, 453+46, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    chessTexture = IMG_LoadTexture(renderer, "images/figures.png");
+    SDL_Surface* boardSurface = IMG_Load("board.png");
+    gBoardTexture = SDL_CreateTextureFromSurface(renderer, boardSurface);
+    SDL_FreeSurface(boardSurface);
+    gChessTexture = IMG_LoadTexture(renderer, "images/figures.png");
+
     bool quit = false;
 
     while (!quit)
@@ -61,12 +68,14 @@ int main(int argc, char* argv[])
             }
         }
         SDL_RenderClear(renderer);
+        SDL_RenderCopy(renderer, gBoardTexture, NULL, NULL);
+
         loadPosition();
+
         SDL_RenderPresent(renderer);
     }
-
-    // Clean up
-    SDL_DestroyTexture(chessTexture);
+    SDL_DestroyTexture(gBoardTexture);
+    SDL_DestroyTexture(gChessTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
