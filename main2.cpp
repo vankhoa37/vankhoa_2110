@@ -1,4 +1,4 @@
-#include "chess_game.cpp"
+#include "chess_game_1vs1.cpp"
 #include "chess_game_nguoi_voi_may.cpp"
 
 int main(int argc, char* argv[]) {
