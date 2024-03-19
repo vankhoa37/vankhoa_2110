@@ -1,4 +1,5 @@
-#include "chess_game1vs1.hpp"
+#include "chess_game_1vs1.hpp"
+#include "choosechesspromote.hpp"
 
 ChessGame::ChessGame() {
     initialMouseX = 0;
@@ -68,11 +69,21 @@ void ChessGame::co1vs1() {
                         if (isValidMove(startRow, startCol, targetRow, targetCol)) {
                             if(val % 2 == 0)
                             {
+                                if (targetRow == 0 && abs(board[startRow][startCol]) == 6 )
+                                {
+                                    int k = choose();
+                                    board[startRow][startCol] = k;
+                                }
                                 board[targetRow][targetCol] = board[startRow][startCol];
                                 board[startRow][startCol] = 0;
                             }
                             if(val % 2 != 0)
                             {
+                                if (targetRow == 0 && abs(board[7-startRow][startCol]) == 6 )
+                                    {
+                                        int k = choose();
+                                        board[7-startRow][startCol] = k * (-1);
+                                    }
                                 board[7-targetRow][targetCol] = board[7-startRow][startCol];
                                 board[7-startRow][startCol] = 0;
                             }
@@ -114,7 +125,7 @@ void ChessGame::handlePieceMovement(int mouseX, int mouseY) {
 }
 
 bool ChessGame::isValidMove(int startRow, int startCol, int targetRow, int targetCol) {
-    return (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol < 8);
+    return (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol < 8&&((startCol != targetCol )|| (startRow != targetRow)));
 }
 
 void ChessGame::loadPosition(int val) {
