@@ -1,0 +1,12 @@
+﻿  main.cpp
+C:\Users\fptshop\Downloads\LTNC\SDL_demo\Project1\Project1\main.cpp(41,5): error C2664: 'BOOL CreateProcessW(LPCWSTR,LPWSTR,LPSECURITY_ATTRIBUTES,LPSECURITY_ATTRIBUTES,BOOL,DWORD,LPVOID,LPCWSTR,LPSTARTUPINFOW,LPPROCESS_INFORMATION)': cannot convert argument 2 from 'char *' to 'LPWSTR'
+  C:\Users\fptshop\Downloads\LTNC\SDL_demo\Project1\Project1\main.cpp(41,25):
+  Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\processthreadsapi.h(385,1):
+  see declaration of 'CreateProcessW'
+  C:\Users\fptshop\Downloads\LTNC\SDL_demo\Project1\Project1\main.cpp(41,5):
+  while trying to match the argument list '(int, char *, int, int, int, int, int, int, STARTUPINFO *, PROCESS_INFORMATION *)'
+  
+C:\Users\fptshop\Downloads\LTNC\SDL_demo\Project1\Project1\main.cpp(50,57): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+C:\Users\fptshop\Downloads\LTNC\SDL_demo\Project1\Project1\main.cpp(62,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\fptshop\Downloads\LTNC\SDL_demo\Project1\Project1\main.cpp(81,1): error C1020: unexpected #endif
