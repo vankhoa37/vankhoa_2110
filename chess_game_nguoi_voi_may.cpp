@@ -3,10 +3,13 @@
 #include <SDL.h>
 #include <iostream>
 #include <time.h>
+#include <SDL_mixer.h>
 #include "connector1.hpp"
+#include "promotechess.hpp"
 
-ChessGameNguoiVoiMay::ChessGameNguoiVoiMay() : initialMouseX(0), initialMouseY(0), size(56), position("e2e4 g8f6 d1h5 f6h5 "), selectedPieceIndex(-1), quit(false), isMousePressed(false) {
-    // Initialize board
+using namespace std;
+
+ChessGameNguoiVoiMay::ChessGameNguoiVoiMay() : initialMouseX(0), initialMouseY(0), size(56), position(""), selectedPieceIndex(-1), quit(false), isMousePressed(false) {
     int initialBoard[8][8] = {
         {-1, -2, -3, -4, -5, -3, -2, -1},
         {-6, -6, -6, -6, -6, -6, -6, -6},
@@ -46,7 +49,7 @@ ChessGameNguoiVoiMay::ChessGameNguoiVoiMay() : initialMouseX(0), initialMouseY(0
 
     // Initialize SDL
     SDL_Init(SDL_INIT_EVERYTHING);
-    window = SDL_CreateWindow("The Chess", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 453 + 46, 453 + 46, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("The Chess With Bot", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 453 + 46, 453 + 46, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_Surface* boardSurface = IMG_Load("board.png");
@@ -65,25 +68,31 @@ ChessGameNguoiVoiMay::~ChessGameNguoiVoiMay() {
 }
 
 void ChessGameNguoiVoiMay::run() {
+    playMusic();
     int val = 1;
-    stockfishMove("e2e4");
-    stockfishMove("g8f6");
-    stockfishMove("d1h5");
-    stockfishMove("f6h5");
-
     while (!quit) {
         SDL_Event event;
         std::string Move = "";
         std::string check = " ";
         if (val > 0) {
-            std::string str = getNextMove(position);
-            position += str + " ";
-            std::cout << str;
-            if (isCastling(str)) {
-                castling(str);
-            }
-            stockfishMove(str);
-            val--;
+                string str = getNextMove(position);
+                cout << str << endl;
+                cout << str[0] << str[1];
+                cout << "vi tri : "  <<  int(str[0] ) - 97 << " "  << str[1] - '0' - 1 << endl;
+                if(isPromote(str, board[str[1]-'0' - 1][int(str[0]) - 97]))
+                            {
+                                cout << "phat hien promote    " << endl;
+                                str = getNextMovePromote(position);
+                                stockfishMovePromote(str, board[str[1]-'0' - 1][int(str[0]) - 97]);
+
+                            }
+                    stockfishMove(str);
+                    position += str + " ";
+                if (isCastling(str))
+                {
+                    castling(str);
+                }
+                 val --;
         }
 
         while (SDL_PollEvent(&event) != 0) {
@@ -137,6 +146,11 @@ void ChessGameNguoiVoiMay::run() {
         loadPosition();
         SDL_RenderPresent(renderer);
     }
+    SDL_DestroyTexture(gBoardTexture);
+    SDL_DestroyTexture(gChessTexture);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 }
 
 bool ChessGameNguoiVoiMay::isPositionInsideRect(int x, int y, const SDL_Rect& rect) {
@@ -190,9 +204,8 @@ bool ChessGameNguoiVoiMay::isCastling(const std::string a) {
     int Y1 = (a[1] - '0') - 1;
     int X2 = int(a[2]) - 97;
     int Y2 = (a[3] - '0') - 1;
-
     int king = abs(board[Y1][X1]);
-    if ((a == "e1g1" || a == "e8c8" || a == "e1c1" || a == "e8g8") && king == 5) {
+    if ((a == "e1g1" || a == "e8c8" || a == "e1c1" || a == "e8g8") ) {
         std::cout << "la nhap thanh ";
         return true;
     }
@@ -204,4 +217,9 @@ void ChessGameNguoiVoiMay::castling(std::string a) {
     if (a == "e8c8") stockfishMove("a8d8");
     if (a == "e1c1") stockfishMove("a1d1");
     if (a == "e8g8") stockfishMove("h8f8");
+}
+void ChessGameNguoiVoiMay::playMusic() {
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+    Mix_Music *music = Mix_LoadMUS("music.mp3");
+    Mix_PlayMusic(music, 10); // Phát nhạc một lần
 }
