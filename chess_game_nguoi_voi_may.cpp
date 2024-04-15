@@ -21,8 +21,6 @@ ChessGameNguoiVoiMay::ChessGameNguoiVoiMay() : initialMouseX(0), initialMouseY(0
         {1, 2, 3, 4, 5, 3, 2, 1}
     };
     std::copy(&initialBoard[0][0], &initialBoard[0][0] + 8 * 8, &board[0][0]);
-
-    // Initialize strings
     chess[0] = "0";
     chess[1] = "rock";
     chess[2] = "knight";
@@ -46,8 +44,6 @@ ChessGameNguoiVoiMay::ChessGameNguoiVoiMay() : initialMouseX(0), initialMouseY(0
     col[5] = "6";
     col[6] = "7";
     col[7] = "8";
-
-    // Initialize SDL
     SDL_Init(SDL_INIT_EVERYTHING);
     window = SDL_CreateWindow("The Chess With Bot", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 453 + 46, 453 + 46, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -221,5 +217,5 @@ void ChessGameNguoiVoiMay::castling(std::string a) {
 void ChessGameNguoiVoiMay::playMusic() {
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     Mix_Music *music = Mix_LoadMUS("music.mp3");
-    Mix_PlayMusic(music, 10); // Phát nhạc một lần
+    Mix_PlayMusic(music, 10); 
 }
