@@ -1,3 +1,4 @@
+// Code tham khảo từ kênh YTB FamTrinli, đã chỉnh sửa để khớp với trò chơi.
 #ifndef CONNECTOR1_H
 #define CONNECTOR1_H
 
