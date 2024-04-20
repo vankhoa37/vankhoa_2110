@@ -6,6 +6,7 @@
 #include <SDL_mixer.h>
 #include "connector1.hpp"
 #include "promotechess.hpp"
+#include "music.hpp"
 
 using namespace std;
 
@@ -21,8 +22,6 @@ ChessGameNguoiVoiMay::ChessGameNguoiVoiMay() : initialMouseX(0), initialMouseY(0
         {1, 2, 3, 4, 5, 3, 2, 1}
     };
     std::copy(&initialBoard[0][0], &initialBoard[0][0] + 8 * 8, &board[0][0]);
-
-    // Initialize strings
     chess[0] = "0";
     chess[1] = "rock";
     chess[2] = "knight";
@@ -67,19 +66,20 @@ ChessGameNguoiVoiMay::~ChessGameNguoiVoiMay() {
     SDL_Quit();
 }
 
-void ChessGameNguoiVoiMay::run() {
-    playMusic();
+void ChessGameNguoiVoiMay::run(int n) {
+   // if(n==1)
+//   playMusic();
     int val = 1;
     while (!quit) {
         SDL_Event event;
         std::string Move = "";
         std::string check = " ";
-        if (val > 0) {
+       if (val > 0) {
                 string str = getNextMove(position);
                 cout << str << endl;
                 cout << str[0] << str[1];
                 cout << "vi tri : "  <<  int(str[0] ) - 97 << " "  << str[1] - '0' - 1 << endl;
-                if(isPromote(str, board[str[1]-'0' - 1][int(str[0]) - 97]))
+                if(isPromote(str, board[str[1]- '0' - 1][int(str[0]) - 97]))
                             {
                                 cout << "phat hien promote    " << endl;
                                 str = getNextMovePromote(position);
@@ -131,6 +131,7 @@ void ChessGameNguoiVoiMay::run() {
                             }
                             board[targetRow][targetCol] = board[startRow][startCol];
                             board[startRow][startCol] = 0;
+                            playMoveMusic();
                             position += Move + " ";
                         }
                         selectedPieceIndex = -1;
@@ -145,6 +146,8 @@ void ChessGameNguoiVoiMay::run() {
         SDL_RenderCopy(renderer, gBoardTexture, NULL, NULL);
         loadPosition();
         SDL_RenderPresent(renderer);
+        SDL_Delay(750);
+        Mix_CloseAudio();
     }
     SDL_DestroyTexture(gBoardTexture);
     SDL_DestroyTexture(gChessTexture);
@@ -196,7 +199,7 @@ void ChessGameNguoiVoiMay::stockfishMove(const std::string move) {
 
     board[Y2][X2] = board[Y1][X1];
     board[Y1][X1] = 0;
-    std::cout << " doi nuoc thanh cong  " << std::endl;
+    //std::cout << " doi nuoc thanh cong  " << std::endl;
 }
 
 bool ChessGameNguoiVoiMay::isCastling(const std::string a) {
@@ -218,8 +221,4 @@ void ChessGameNguoiVoiMay::castling(std::string a) {
     if (a == "e1c1") stockfishMove("a1d1");
     if (a == "e8g8") stockfishMove("h8f8");
 }
-void ChessGameNguoiVoiMay::playMusic() {
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-    Mix_Music *music = Mix_LoadMUS("music.mp3");
-    Mix_PlayMusic(music, 10); // Phát nhạc một lần
-}
+

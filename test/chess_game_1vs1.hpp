@@ -22,6 +22,7 @@ private:
     SDL_Texture* gBoardTexture;
     SDL_Texture* gChessTexture;
     SDL_Texture* gBoardTexture2;
+    SDL_Texture* gSuggest;
     int selectedPieceIndex;
     bool quit;
     bool isMousePressed;

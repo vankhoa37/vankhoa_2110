@@ -12,7 +12,7 @@ int choose() {
     SDL_Init(SDL_INIT_EVERYTHING);
     window = SDL_CreateWindow("Choose", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 400, 300, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    SDL_Surface* surface = IMG_Load("covua.png");
+    SDL_Surface* surface = IMG_Load("images/covua.png");
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderPresent(renderer);

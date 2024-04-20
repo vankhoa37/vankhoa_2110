@@ -8,7 +8,7 @@ class ChessGameNguoiVoiMay {
 public:
     ChessGameNguoiVoiMay();
     ~ChessGameNguoiVoiMay();
-    void run();
+    void run(int n);
 
 private:
     int initialMouseX;
@@ -34,7 +34,7 @@ private:
     void stockfishMove(const std::string move);
     bool isCastling(const std::string a);
     void castling(std::string a);
-    void playMusic();
+
 };
 
 #endif // CHESSGAMENGUOIVOIMAY_HPP

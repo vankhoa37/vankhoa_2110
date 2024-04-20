@@ -1,3 +1,74 @@
 # depslib dependency file v1.0
-1709716505 source:c:\users\fptshop\downloads\ltnc\game\test\main.cpp
+1713366067 source:c:\users\fptshop\downloads\ltnc\game\test\main.cpp
+	<iostream>
+	<SDL.h>
+	<SDL_mixer.h>
+	<vector>
+	"SDL2ImageRenderer.hpp"
+	"chess_game_1vs1.cpp"
+	"chess_game_nguoi_voi_may.cpp"
+	"suggest_printer.hpp"
+
+1712829971 c:\users\fptshop\downloads\ltnc\game\test\sdl2imagerenderer.hpp
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+
+1713176003 c:\users\fptshop\downloads\ltnc\game\test\chess_game_1vs1.cpp
+	"chess_game_1vs1.hpp"
+	"choosechesspromote.hpp"
+	"connector1.hpp"
+	"suggest_printer.hpp"
+
+1712909916 c:\users\fptshop\downloads\ltnc\game\test\chess_game_1vs1.hpp
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	<vector>
+	<string>
+
+1712911215 c:\users\fptshop\downloads\ltnc\game\test\choosechesspromote.hpp
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+	<iostream>
+
+1710422297 c:\users\fptshop\downloads\ltnc\game\test\connector1.hpp
+	<windows.h>
+	<stdio.h>
+	<iostream>
+	<string>
+
+1713197921 c:\users\fptshop\downloads\ltnc\game\test\suggest_printer.hpp
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<iostream>
+	<string>
+
+1713198072 c:\users\fptshop\downloads\ltnc\game\test\chess_game_nguoi_voi_may.cpp
+	"chess_game_nguoi_voi_may.hpp"
+	<SDL_image.h>
+	<SDL.h>
+	<iostream>
+	<time.h>
+	<SDL_mixer.h>
+	"connector1.hpp"
+	"promotechess.hpp"
+
+1712764703 c:\users\fptshop\downloads\ltnc\game\test\chess_game_nguoi_voi_may.hpp
+	<SDL.h>
+	<string>
+
+1710768415 c:\users\fptshop\downloads\ltnc\game\test\promotechess.hpp
+	<SDL.h>
+	<string>
+	<iostream>
+
+1713408599 source:c:\users\fptshop\downloads\ltnc\game\test\m2.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<iostream>
+	<vector>
 
