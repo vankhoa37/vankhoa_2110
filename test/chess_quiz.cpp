@@ -177,6 +177,7 @@ void ChessQuiz::run() {
                                playVictoryMusic();
                                 title = "You will win by a Queen, Press quit to continue solving the puzzle";
                                 quit = true;
+                                Move = "";
                             }
                         }
                         selectedPieceIndex = -1;
@@ -202,8 +203,12 @@ void ChessQuiz::run() {
         if(dem % 2 != 0) valCorlor = 0;
         dem++;
         SDL_DestroyTexture(textTexture);
+        SDL_Delay(250);
+        if(title == "You will win by a Queen, Press quit to continue solving the puzzle"){
+            SDL_Delay(5000);
+        }
         //Mix_FreeMusic();
-        SDL_Delay(750);
+       /* SDL_Delay(750);
         if(title == "You will win by a Queen, Press quit to continue solving the puzzle"){
             SDL_Delay(5000);
         }
@@ -211,9 +216,11 @@ void ChessQuiz::run() {
             SDL_Delay(1000);
             countFalseMove = 0;
         }
-        Mix_CloseAudio();
-
+        Mix_CloseAudio();*/
+        //if(title == "You will win by a Queen, Press quit to continue solving the puzzle")
 
     }
+    for(int j = 0; j < 200; j++)
+    Mix_CloseAudio();
 
 }

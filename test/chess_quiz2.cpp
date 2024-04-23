@@ -179,5 +179,6 @@ void ChessQuiz2::run2() {
         dem++;
         SDL_Delay(500);
     }
+    for(int i = 0; i < 10; i++) Mix_CloseAudio();
 }
 

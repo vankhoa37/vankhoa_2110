@@ -22,7 +22,7 @@ public:
         window = SDL_CreateWindow("Suggest", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
         TTF_Init();
-        font = TTF_OpenFont("ARIALNB.ttf", 30);
+        font = TTF_OpenFont("font.ttf", 30);
         boardSurface = IMG_Load("images/background_suggest.jpg");
         if (!boardSurface) {
             std::cerr << "Failed to load board image." << std::endl;

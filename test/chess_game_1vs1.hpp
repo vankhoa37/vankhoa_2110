@@ -30,6 +30,9 @@ private:
     void handlePieceMovement(int mouseX, int mouseY);
     bool isValidMove(int startRow, int startCol, int targetRow, int targetCol);
     void loadPosition(int val);
+    bool isCastling(const std::string a);
+    void castling(std::string a, int val);
+    void moveCastling(std::string move, int val);
 
 public:
     ChessGame();

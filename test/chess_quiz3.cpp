@@ -13,7 +13,7 @@ ChessQuiz3::ChessQuiz3() {
 
     gChessTexture = IMG_LoadTexture(renderer, "images/figures.png");
 
-    font = TTF_OpenFont("ARIALBI.ttf", 16);
+    font = TTF_OpenFont("SFUFuturaBold.ttf", 15);
     if (!font) {
         std::cout << "Failed to load font: " << TTF_GetError() << std::endl;
         exit(1);
@@ -201,27 +201,18 @@ void ChessQuiz3::run3() {
         int textWidth, textHeight;
         SDL_QueryTexture(textTexture, NULL, NULL, &textWidth, &textHeight);
         int textX = (screenWidth - textWidth) / 2;
-        int textY = 7 ;
+        int textY = 5 ;
         SDL_Rect textRect = {textX, textY, textWidth, textHeight};
         SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
         SDL_RenderPresent(renderer);
         if(dem % 2 == 0) valCorlor = 255;
         if(dem % 2 != 0) valCorlor = 0;
         dem++;
-        SDL_Delay(750);
-      if (checkWin() && check1 == true) {
-       SDL_Delay(5000);
-       check1 = false;
-       quit = true;
-}
-
-        if(falseMove == true){
-            SDL_Delay(1000);
-        }
-        Mix_CloseAudio();
-
-
+        SDL_Delay(500);
+        //Mix_CloseAudio();
 
     }
+    for(int i = 0; i < 200; i++)
+       Mix_CloseAudio();
 }
 

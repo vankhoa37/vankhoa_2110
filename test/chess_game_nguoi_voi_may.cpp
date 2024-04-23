@@ -146,7 +146,7 @@ void ChessGameNguoiVoiMay::run(int n) {
         SDL_RenderCopy(renderer, gBoardTexture, NULL, NULL);
         loadPosition();
         SDL_RenderPresent(renderer);
-        SDL_Delay(750);
+        SDL_Delay(300);
         Mix_CloseAudio();
     }
     SDL_DestroyTexture(gBoardTexture);
@@ -208,7 +208,7 @@ bool ChessGameNguoiVoiMay::isCastling(const std::string a) {
     int X2 = int(a[2]) - 97;
     int Y2 = (a[3] - '0') - 1;
     int king = abs(board[Y1][X1]);
-    if ((a == "e1g1" || a == "e8c8" || a == "e1c1" || a == "e8g8") ) {
+    if ((a == "e1g1" || a == "e8c8" || a == "e1c1" || a == "e8g8") && king == 5 ) {
         std::cout << "la nhap thanh ";
         return true;
     }

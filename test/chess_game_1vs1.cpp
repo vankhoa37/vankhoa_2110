@@ -116,6 +116,7 @@ void ChessGame::co1vs1() {
                             }
                             position += Move + " ";
                             val ++;
+                            if(isCastling(Move)) castling(Move, val+1);
                         }
                         selectedPieceIndex = -1;
                     }
@@ -159,15 +160,17 @@ void ChessGame::co1vs1() {
         SDL_RenderCopy(renderer, gBoardTexture2, NULL, NULL);
         loadPosition(val);
         SDL_RenderPresent(renderer);
-        SDL_Delay(750);
-        Mix_CloseAudio();
+        //SDL_Delay(300);
     }
+
     SDL_DestroyTexture(gBoardTexture);
     SDL_DestroyTexture(gBoardTexture2);
     SDL_DestroyTexture(gChessTexture);
     SDL_DestroyTexture(gSuggest);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    for(int i = 0; i < 200; i++)
+    Mix_CloseAudio();
     SDL_Quit();
 }
 
@@ -199,7 +202,7 @@ void ChessGame::loadPosition(int val) {
             figures[k].x = size * j + 25;
             if(val %2 == 0)
             figures[k].y = size * i  + 25;
-            if(val %2 !=0)
+            if(val %2 != 0)
             figures[k].y = size * (7 - i)  + 25;
             figures[k].w = size;
             figures[k].h = size;
@@ -209,6 +212,44 @@ void ChessGame::loadPosition(int val) {
             SDL_RenderCopy(renderer, gChessTexture, &sourceRect, &figures[k]);
             k++;
         }
+}
+bool ChessGame::isCastling(const std::string a) {
+    int X1 = int(a[0]) - 97;
+    int Y1 = (a[1] - '0') - 1;
+    int X2 = int(a[2]) - 97;
+    int Y2 = (a[3] - '0') - 1;
+    int king = abs(board[Y1][X1]);
+    if ((a == "e1g1" || a == "e8c8" || a == "e1c1" || a == "e8g8") && king == 5 ) {
+        return true;
+    }
+    return false;
+}
+
+void ChessGame::castling(std::string a, int val) {
+    if (a == "e1g1") moveCastling("h1f1", val);
+    if (a == "e8c8") moveCastling("a8d8", val);
+    if (a == "e1c1") moveCastling("a1d1", val);
+    if (a == "e8g8") moveCastling("h8f8", val);
+}
+void ChessGame::moveCastling(std::string move, int val) {
+    if(val % 2 == 0){
+    int X1 = int(move[0]) - 97;
+    int Y1 = (move[1] - '0') - 1;
+    int X2 = int(move[2]) - 97;
+    int Y2 = (move[3] - '0') - 1;
+    board[7-Y2][X2] = board[7-Y1][X1];
+    board[7-Y1][X1] = 0;
+    }
+    if(val % 2 != 0){
+    int X1 = int(move[0]) - 97;
+    int Y1 = (move[1] - '0') - 1;
+    int X2 = int(move[2]) - 97;
+    int Y2 = (move[3] - '0') - 1;
+    board[Y2][X2] = board[Y1][X1];
+    board[Y1][X1] = 0;
+    }
+
+
 }
 
 ChessGame::~ChessGame() {
