@@ -1,3 +1,4 @@
+// Code (kết nối tới 1 phần mềm AI ) tham khảo từ FamTrinli , đã chỉnh sửa để phù hợp với game
 #ifndef CONNECTOR1_H
 #define CONNECTOR1_H
 
