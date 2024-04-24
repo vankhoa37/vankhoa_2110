@@ -40,7 +40,7 @@ ChessGame::ChessGame() {
     gSuggest = IMG_LoadTexture(renderer, "images/bongden.png");
 }
 
-void ChessGame::co1vs1() {
+void ChessGame::co1vs1(int valImage) {
     int val = 0;
     int X, Y;
     ConnectToEngine("stockfish.exe");
@@ -87,7 +87,7 @@ void ChessGame::co1vs1() {
                                 }
                                 board[targetRow][targetCol] = board[startRow][startCol];
                                 board[startRow][startCol] = 0;
-                                playMoveMusic();
+                                if(valImage % 2 != 0)playMoveMusic();
                             }
                             if(val % 2 != 0)
                             {
@@ -98,7 +98,7 @@ void ChessGame::co1vs1() {
                                     }
                                 board[7-targetRow][targetCol] = board[7-startRow][startCol];
                                 board[7-startRow][startCol] = 0;
-                                playMoveMusic();
+                                if(valImage % 2 != 0) playMoveMusic();
                             }
                             if(val % 2 == 0){
                             Move += row[startCol];
@@ -116,7 +116,7 @@ void ChessGame::co1vs1() {
                             }
                             position += Move + " ";
                             val ++;
-                            if(isCastling(Move)) castling(Move, val+1);
+                            if(isCastling(Move)) castling(Move, val);
                         }
                         selectedPieceIndex = -1;
                     }
@@ -130,7 +130,7 @@ void ChessGame::co1vs1() {
                     std :: string str = getNextMove(position);
                     std :: cout << "Player 1 suggest : " << str << std :: endl;
                     std :: string Suggest;
-                    Suggest = "Your suggest : " + str + " \n" + "good luck!";
+                    Suggest = str ;
                     SuggestPrinter prt;
                     prt.init();
                     prt.printSuggest(Suggest);
@@ -142,7 +142,7 @@ void ChessGame::co1vs1() {
                 {
                     std :: string str = getNextMove(position);
                     std :: string Suggest;
-                    Suggest = "Your suggest : " + str + "\n" + "good luck!";
+                    Suggest = str;
                     SuggestPrinter prt;
                     prt.init();
                     prt.printSuggest(Suggest);
