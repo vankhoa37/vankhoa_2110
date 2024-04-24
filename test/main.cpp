@@ -22,6 +22,7 @@ int currentImageIndex = 0;
 SDL_Window* window2 = nullptr;
 SDL_Renderer* renderer2 = nullptr;
 SDL2ImageRenderer imageRenderer(nullptr);
+bool isPlayingMusic = false;
 int main(int argc, char* args[]) {
     //playCorrectMusic();
     bool quit2 = false;
@@ -32,7 +33,7 @@ int main(int argc, char* args[]) {
     imageRenderer.setRenderer(renderer2);
      playMusic();
     // SDL_Delay(5000);
-   Mix_PauseMusic();
+     Mix_PauseMusic();
   //playCorrectMusic();
     while (!quit2) {
 
@@ -52,6 +53,8 @@ int main(int argc, char* args[]) {
             SDL_RenderClear(renderer2);
             imageRenderer.renderImage(0, 0);
             SDL_RenderPresent(renderer2);
+            playMusic();
+            Mix_PauseMusic();
             create = false;
         }
         SDL_Event e;
@@ -76,45 +79,50 @@ int main(int argc, char* args[]) {
                  else if (X >= 1290 && X <= 1343 && Y >= 21 && Y <= 76 && currentImageIndex == 4) currentImageIndex = 0;
                  else if (X >= 732 && X <= 1022 && Y >= 485 && Y <= 557 && currentImageIndex == 0) currentImageIndex = 4;
                  else if (X >= 732 && X <= 1022 && Y >= 485 && Y <= 557 && currentImageIndex == 1) currentImageIndex = 5;
-                if(currentImageIndex % 2 != 0) Mix_ResumeMusic();
-                if(currentImageIndex % 2 == 0) Mix_PauseMusic();
-
+                if(currentImageIndex % 2 != 0 && isPlayingMusic == false){
+                        Mix_ResumeMusic();
+                        isPlayingMusic = true;
+                }
+                if(currentImageIndex % 2 == 0 && isPlayingMusic == true){
+                        Mix_PauseMusic();
+                        isPlayingMusic = false;
+                }
                  else if (X >= 324 && X <= 611 && Y >= 275 && Y <= 489 && (currentImageIndex == 2 || currentImageIndex == 3)) {
-                        for(int i = 0; i < 200; i++) Mix_CloseAudio();
+                    //for(int i = 0; i < 200; i++)
                     SDL_DestroyWindow(window2);
                     SDL_DestroyRenderer(renderer2);
                     create = true;
                     ChessGame game;
-                    game.co1vs1();
-                    playMusic();
+                    game.co1vs1(currentImageIndex);
+                    //playMusic();
                 }
                 else if (X >= 750 && X <= 1040 && Y >=215 && Y <= 486 && (currentImageIndex == 2 || currentImageIndex == 3)) {
                     SDL_DestroyWindow(window2);
                     SDL_DestroyRenderer(renderer2);
                     create = true;
                     ChessGameNguoiVoiMay game1;
-                    game1.run(0);
+                    game1.run(currentImageIndex);
                 }
                 else if (X >= 182 && X <= 604 && Y >= 287 && Y <= 403 && (currentImageIndex == 4 || currentImageIndex == 5 )) {
                     SDL_DestroyWindow(window2);
                     SDL_DestroyRenderer(renderer2);
                     create = true;
                     ChessQuiz quiz;
-                    quiz.run();
+                    quiz.run(currentImageIndex);
                 }
                 else if (X >= 755 && X <= 1174 && Y >= 287 && Y <= 403 && (currentImageIndex == 4 || currentImageIndex == 5 )) {
                     SDL_DestroyWindow(window2);
                     SDL_DestroyRenderer(renderer2);
                     create = true;
                     ChessQuiz2 quiz;
-                    quiz.run2();
+                    quiz.run2(currentImageIndex);
                 }
                 else if (X >= 182 && X <= 604 && Y >= 467 && Y <= 581 && (currentImageIndex == 4 || currentImageIndex == 5 )) {
                     SDL_DestroyWindow(window2);
                     SDL_DestroyRenderer(renderer2);
                     create = true;
                     ChessQuiz3 quiz;
-                    quiz.run3();
+                    quiz.run3(currentImageIndex);
                 }
             }
         }

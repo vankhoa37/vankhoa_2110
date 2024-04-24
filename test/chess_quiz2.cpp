@@ -98,7 +98,7 @@ void ChessQuiz2::loadPosition() {
     }
 }
 
-void ChessQuiz2::run2() {
+void ChessQuiz2::run2(int valImage) {
     bool quit = false;
     int i = 0;
     int valCorlor = 0;
@@ -143,7 +143,7 @@ void ChessQuiz2::run2() {
                             std::cout << Move << std::endl;
                             if(Move != playerMove[0])
                             {
-                                playErrorMusic();
+                               if(valImage %2 != 0) playErrorMusic();
                                 Move = "";
                                 title = "Incorrect, Please try again!";
                                 continue;
@@ -151,7 +151,7 @@ void ChessQuiz2::run2() {
                             board[targetRow][targetCol] = board[startRow][startCol];
                             board[startRow][startCol] = 0;
                             if(Move == playerMove[0]){
-                                playVictoryMusic();
+                               if(valImage %2 != 0) playVictoryMusic();
                                 title = "Correct, This is the brilliant move !!!";
                             }
                         }

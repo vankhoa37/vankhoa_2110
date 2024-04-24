@@ -104,7 +104,7 @@ void ChessQuiz::loadPosition() {
 
 
 
-void ChessQuiz::run() {
+void ChessQuiz::run(int valImage) {
     bool quit = false;
     int i = 0;
     int valCorlor = 0;
@@ -157,7 +157,7 @@ void ChessQuiz::run() {
                             if(Move != playerMove[i])
                             {
 
-                                playErrorMusic();
+                                if(valImage %2 != 0)playErrorMusic();
                                 Move = "";
                                 title = "Incorrect, Please try again!";
                                 countFalseMove = 1;
@@ -165,7 +165,7 @@ void ChessQuiz::run() {
                             }
                              if(Move == playerMove[i])
                             {
-                                playCorrectMusic();
+                               if(valImage %2 != 0) playCorrectMusic();
                                 trueMove = true;
                                 title = "Correct !!!";
                             }
@@ -174,7 +174,7 @@ void ChessQuiz::run() {
 
 
                             if(Move == playerMove[2]){
-                               playVictoryMusic();
+                              if(valImage %2 != 0) playVictoryMusic();
                                 title = "You will win by a Queen, Press quit to continue solving the puzzle";
                                 quit = true;
                                 Move = "";

@@ -104,7 +104,7 @@ bool ChessQuiz3::checkWin(){
     return false;
 }
 
-void ChessQuiz3::run3() {
+void ChessQuiz3::run3(int valImage) {
     bool quit = false;
     int i = 0;
     int valCorlor = 0;
@@ -158,19 +158,19 @@ void ChessQuiz3::run3() {
                             std::cout << Move << std::endl;
                             if(Move != playerMove[i] && i < 2)
                             {
-                                playErrorMusic();
+                              if(valImage % 2 != 0)  playErrorMusic();
                                 Move = "";
                                 title = "Tried sacrificing some pieces and seize the advantage with the windmill tactic.";
                                 falseMove = true;
                                 continue;
                             }
                             if(i >= 2 && i <= 10 && targetRow == 2){
-                                playCorrectMusic();
+                               if(valImage % 2 != 0) playCorrectMusic();
                                 trueMove = true;
                             }
                              if(i >= 2 && i <= 10 && targetRow != 2){
                                 title = "Incorrect, Please try again!";
-                                playErrorMusic();
+                              if(valImage % 2 != 0)  playErrorMusic();
                                 continue;
                             }
 
@@ -178,11 +178,11 @@ void ChessQuiz3::run3() {
                                 trueMove = true;
                             }
 
-                            if(trueMove == true) playCorrectMusic();
+                            if(trueMove == true && valImage % 2 != 0) playCorrectMusic();
                             board[targetRow][targetCol] = board[startRow][startCol];
                             board[startRow][startCol] = 0;
                             if(checkWin()){
-                                playVictoryMusic();
+                              if(valImage % 2 != 0)  playVictoryMusic();
                                 title = "Great job, you've found the windmill tactic!";
                             }
                         }

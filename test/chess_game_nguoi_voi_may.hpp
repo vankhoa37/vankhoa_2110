@@ -24,6 +24,7 @@ private:
     SDL_Renderer* renderer;
     SDL_Texture* gBoardTexture;
     SDL_Texture* gChessTexture;
+    SDL_Texture* gGameOverTexture;
     int selectedPieceIndex;
     bool quit;
     bool isMousePressed;
@@ -32,7 +33,7 @@ private:
     bool isValidMove(int startRow, int startCol, int targetRow, int targetCol);
     void loadPosition();
     void stockfishMove(const std::string move);
-    bool isCastling(const std::string a);
+    bool isCastling(const std::string a, int val);
     void castling(std::string a);
 
 };

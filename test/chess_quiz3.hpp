@@ -12,7 +12,7 @@ class ChessQuiz3 {
 public:
     ChessQuiz3();
     ~ChessQuiz3();
-    void run3();
+    void run3(int valImage);
 
 private:
     SDL_Window* window;

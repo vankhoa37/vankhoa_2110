@@ -36,7 +36,7 @@ private:
 
 public:
     ChessGame();
-    void co1vs1();
+    void co1vs1(int valImage);
     ~ChessGame();
 };
 

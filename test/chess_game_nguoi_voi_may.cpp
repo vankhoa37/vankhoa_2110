@@ -52,8 +52,11 @@ ChessGameNguoiVoiMay::ChessGameNguoiVoiMay() : initialMouseX(0), initialMouseY(0
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_Surface* boardSurface = IMG_Load("images/board.png");
+    SDL_Surface* gameOverSurface = IMG_Load("images/gameover.png");
+    gGameOverTexture = SDL_CreateTextureFromSurface(renderer, gameOverSurface);
     gBoardTexture = SDL_CreateTextureFromSurface(renderer, boardSurface);
     SDL_FreeSurface(boardSurface);
+    SDL_FreeSurface(gameOverSurface);
     gChessTexture = IMG_LoadTexture(renderer, "images/figures.png");
     ConnectToEngine("stockfish.exe");
 }
@@ -69,6 +72,7 @@ ChessGameNguoiVoiMay::~ChessGameNguoiVoiMay() {
 void ChessGameNguoiVoiMay::run(int n) {
    // if(n==1)
 //   playMusic();
+    bool playing = true;
     int val = 1;
     while (!quit) {
         SDL_Event event;
@@ -77,6 +81,12 @@ void ChessGameNguoiVoiMay::run(int n) {
        if (val > 0) {
                 string str = getNextMove(position);
                 cout << str << endl;
+                if(str == "error"){
+                    playing = false;
+                    cout << "Bạn đã thua " << endl;
+                    if (n % 2 != 0) playGameOverMusic();
+                }
+                if(playing == true){
                 cout << str[0] << str[1];
                 cout << "vi tri : "  <<  int(str[0] ) - 97 << " "  << str[1] - '0' - 1 << endl;
                 if(isPromote(str, board[str[1]- '0' - 1][int(str[0]) - 97]))
@@ -88,13 +98,15 @@ void ChessGameNguoiVoiMay::run(int n) {
                             }
                     stockfishMove(str);
                     position += str + " ";
-                if (isCastling(str))
+                if (isCastling(str, val))
                 {
                     castling(str);
                 }
-                 val --;
+                }
+                val --;
         }
-
+        cout << playing;
+        if(playing == true){
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
                 quit = true;
@@ -110,7 +122,6 @@ void ChessGameNguoiVoiMay::run(int n) {
                     }
                 }
             } else if (event.type == SDL_MOUSEBUTTONUP) {
-                val++;
                 if (event.button.button == SDL_BUTTON_LEFT) {
                     if (selectedPieceIndex != -1) {
                         for (int i = 0; i < 32; i++)
@@ -126,12 +137,13 @@ void ChessGameNguoiVoiMay::run(int n) {
                             Move += row[targetCol];
                             Move += col[targetRow];
                             std::cout << Move << std::endl;
-                            if (isCastling(Move)) {
+                            if (isCastling(Move, val)) {
                                 castling(Move);
                             }
                             board[targetRow][targetCol] = board[startRow][startCol];
                             board[startRow][startCol] = 0;
-                            playMoveMusic();
+                            val++;
+                            if(n % 2 != 0) playMoveMusic();
                             position += Move + " ";
                         }
                         selectedPieceIndex = -1;
@@ -141,13 +153,26 @@ void ChessGameNguoiVoiMay::run(int n) {
                 handlePieceMovement(event.motion.x, event.motion.y);
             }
         }
-
+        }
+        if(playing == true){
         SDL_RenderClear(renderer);
         SDL_RenderCopy(renderer, gBoardTexture, NULL, NULL);
         loadPosition();
         SDL_RenderPresent(renderer);
         SDL_Delay(300);
         Mix_CloseAudio();
+        }
+        if(playing == false)
+        {
+
+            SDL_RenderClear(renderer);
+            SDL_RenderCopy(renderer, gGameOverTexture, NULL, NULL);
+            SDL_RenderPresent(renderer);
+            SDL_Delay(5000);
+            Mix_CloseAudio();
+            quit = true;
+
+        }
     }
     SDL_DestroyTexture(gBoardTexture);
     SDL_DestroyTexture(gChessTexture);
@@ -202,15 +227,30 @@ void ChessGameNguoiVoiMay::stockfishMove(const std::string move) {
     //std::cout << " doi nuoc thanh cong  " << std::endl;
 }
 
-bool ChessGameNguoiVoiMay::isCastling(const std::string a) {
+bool ChessGameNguoiVoiMay::isCastling(const std::string a, int val) {
+    if(val > 0){
     int X1 = int(a[0]) - 97;
     int Y1 = (a[1] - '0') - 1;
     int X2 = int(a[2]) - 97;
     int Y2 = (a[3] - '0') - 1;
-    int king = abs(board[Y1][X1]);
-    if ((a == "e1g1" || a == "e8c8" || a == "e1c1" || a == "e8g8") && king == 5 ) {
-        std::cout << "la nhap thanh ";
+   // cout << Y1 << " " << X1 << endl;
+    int king = board[Y2][X2];
+   // std:: cout << "val quan co : " << king << endl;
+    if ((a == "e1g1" || a == "e8c8" || a == "e1c1" || a == "e8g8") && king == -5  ) {
         return true;
+    }
+    return false;
+    }
+    if(val == 0){
+        int X1 = int(a[0]) - 97;
+    int Y1 = (a[1] - '0') - 1;
+    int X2 = int(a[2]) - 97;
+    int Y2 = (a[3] - '0') - 1;
+    int king = board[Y1][X1];
+    if ((a == "e1g1" || a == "e8c8" || a == "e1c1" || a == "e8g8") && king == 5  ) {
+        return true;
+    }
+    return false;
     }
     return false;
 }

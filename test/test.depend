@@ -1,26 +1,31 @@
 # depslib dependency file v1.0
-1713366067 source:c:\users\fptshop\downloads\ltnc\game\test\main.cpp
+1713862875 source:c:\users\fptshop\downloads\ltnc\game\test\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_mixer.h>
 	<vector>
+	"music.hpp"
 	"SDL2ImageRenderer.hpp"
 	"chess_game_1vs1.cpp"
 	"chess_game_nguoi_voi_may.cpp"
 	"suggest_printer.hpp"
+	"chess_quiz.cpp"
+	"chess_quiz2.cpp"
+	"chess_quiz3.cpp"
 
 1712829971 c:\users\fptshop\downloads\ltnc\game\test\sdl2imagerenderer.hpp
 	<SDL.h>
 	<SDL_image.h>
 	<string>
 
-1713176003 c:\users\fptshop\downloads\ltnc\game\test\chess_game_1vs1.cpp
+1713804793 c:\users\fptshop\downloads\ltnc\game\test\chess_game_1vs1.cpp
 	"chess_game_1vs1.hpp"
 	"choosechesspromote.hpp"
 	"connector1.hpp"
 	"suggest_printer.hpp"
+	"music.hpp"
 
-1712909916 c:\users\fptshop\downloads\ltnc\game\test\chess_game_1vs1.hpp
+1713804647 c:\users\fptshop\downloads\ltnc\game\test\chess_game_1vs1.hpp
 	<SDL.h>
 	<SDL_image.h>
 	<iostream>
@@ -33,20 +38,20 @@
 	<string>
 	<iostream>
 
-1710422297 c:\users\fptshop\downloads\ltnc\game\test\connector1.hpp
+1713867811 c:\users\fptshop\downloads\ltnc\game\test\connector1.hpp
 	<windows.h>
 	<stdio.h>
 	<iostream>
 	<string>
 
-1713197921 c:\users\fptshop\downloads\ltnc\game\test\suggest_printer.hpp
+1713771740 c:\users\fptshop\downloads\ltnc\game\test\suggest_printer.hpp
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL_image.h>
 	<iostream>
 	<string>
 
-1713198072 c:\users\fptshop\downloads\ltnc\game\test\chess_game_nguoi_voi_may.cpp
+1713869700 c:\users\fptshop\downloads\ltnc\game\test\chess_game_nguoi_voi_may.cpp
 	"chess_game_nguoi_voi_may.hpp"
 	<SDL_image.h>
 	<SDL.h>
@@ -55,8 +60,9 @@
 	<SDL_mixer.h>
 	"connector1.hpp"
 	"promotechess.hpp"
+	"music.hpp"
 
-1712764703 c:\users\fptshop\downloads\ltnc\game\test\chess_game_nguoi_voi_may.hpp
+1713869540 c:\users\fptshop\downloads\ltnc\game\test\chess_game_nguoi_voi_may.hpp
 	<SDL.h>
 	<string>
 
@@ -71,4 +77,43 @@
 	<SDL_ttf.h>
 	<iostream>
 	<vector>
+
+1713673974 c:\users\fptshop\downloads\ltnc\game\test\music.hpp
+	<iostream>
+	<SDL.h>
+	<SDL_mixer.h>
+
+1713677025 c:\users\fptshop\downloads\ltnc\game\test\chess_quiz.cpp
+	"chess_quiz.hpp"
+	<SDL_mixer.h>
+
+1713581988 c:\users\fptshop\downloads\ltnc\game\test\chess_quiz.hpp
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<iostream>
+	<vector>
+	"music.hpp"
+
+1713677255 c:\users\fptshop\downloads\ltnc\game\test\chess_quiz2.cpp
+	"chess_quiz2.hpp"
+
+1713457977 c:\users\fptshop\downloads\ltnc\game\test\chess_quiz2.hpp
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<iostream>
+	<vector>
+	"music.hpp"
+
+1713772115 c:\users\fptshop\downloads\ltnc\game\test\chess_quiz3.cpp
+	"chess_quiz3.hpp"
+
+1713497879 c:\users\fptshop\downloads\ltnc\game\test\chess_quiz3.hpp
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<iostream>
+	<vector>
+	"music.hpp"
 
