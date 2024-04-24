@@ -19,10 +19,10 @@ public:
 
     void init() {
         SDL_Init(SDL_INIT_VIDEO);
-        window = SDL_CreateWindow("Suggest", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
+        window = SDL_CreateWindow("Suggest", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 499, 499, SDL_WINDOW_SHOWN);
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
         TTF_Init();
-        font = TTF_OpenFont("font.ttf", 30);
+        font = TTF_OpenFont("font.ttf", 50);
         boardSurface = IMG_Load("images/background_suggest.jpg");
         if (!boardSurface) {
             std::cerr << "Failed to load board image." << std::endl;
@@ -52,7 +52,7 @@ public:
     }
 
     void printSuggest(const std::string& str) {
-    SDL_Color textColor = {255, 255, 0, 0};
+    SDL_Color textColor = {255, 0, 0 , 255};
     SDL_Surface* textSurface = TTF_RenderText_Solid(font, str.c_str(), textColor);
     if (!textSurface) {
         return;

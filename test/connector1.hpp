@@ -35,7 +35,7 @@ void ConnectToEngine(char* enginePath)
 
 std::string getNextMove(std::string currentPosition)
 {
-    std::cout << "Connected successfully." << std::endl;
+    //std::cout << "Connected successfully." << std::endl;
     std::string result;
     currentPosition = "position startpos moves " + currentPosition + "\ngo\n";
 
@@ -53,7 +53,7 @@ std::string getNextMove(std::string currentPosition)
     } while (bytesRead >= sizeof(buffer));
 
     int index = result.find("bestmove");
-    std::cout << "Stockfish: " << result.substr(index + 9, 30) << std::endl;
+    //std::cout << "Stockfish: " << result.substr(index + 9, 5) << std::endl;
     if (index >= 0)
         return result.substr(index + 9, 4);
 
@@ -61,7 +61,7 @@ std::string getNextMove(std::string currentPosition)
 }
 std::string getNextMovePromote(std::string currentPosition)
 {
-    std::cout << "Connected successfully." << std::endl;
+    //std::cout << "Connected successfully." << std::endl;
     std::string result;
     currentPosition = "position startpos moves " + currentPosition + "\ngo\n";
 
@@ -79,7 +79,7 @@ std::string getNextMovePromote(std::string currentPosition)
     } while (bytesRead >= sizeof(buffer));
 
     int index = result.find("bestmove");
-    std::cout << "Stockfish: " << result.substr(index + 9, 30) << std::endl;
+   // std::cout << "Stockfish: " << result.substr(index + 9, 5) << std::endl;
     if (index >= 0)
         return result.substr(index + 9, 5);
 
