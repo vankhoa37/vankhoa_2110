@@ -49,7 +49,7 @@ Game gồm 3 phần:
 
 ## Tham khảo và Đồ họa
 ### 5.1 Tham khảo Code
-- **YTB FamTrinli:** Tham khảo phần connector1.hpp để kết nối với AI, đã chỉnh sửa để phù hợp hơn với chương trình
+- **YTB FamTrinli:** Tham khảo phần connector1.hpp để kết nối với một ứng dụng file .exe có sẵn (stockfish.exe), đã chỉnh sửa để phù hợp hơn với chương trình
 ### 5.2 Đồ họa
 - **Bàn cờ và các quân cờ:** YTB FamTrinli.
 - **Menu ảnh:** Cap màn hình game Master Chess.
