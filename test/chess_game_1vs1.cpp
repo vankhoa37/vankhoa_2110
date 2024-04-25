@@ -232,7 +232,7 @@ void ChessGame::castling(std::string a, int val) {
     if (a == "e8g8") moveCastling("h8f8", val);
 }
 void ChessGame::moveCastling(std::string move, int val) {
-    if(val % 2 == 0){
+    if(val % 2 != 0){
     int X1 = int(move[0]) - 97;
     int Y1 = (move[1] - '0') - 1;
     int X2 = int(move[2]) - 97;
@@ -240,7 +240,7 @@ void ChessGame::moveCastling(std::string move, int val) {
     board[7-Y2][X2] = board[7-Y1][X1];
     board[7-Y1][X1] = 0;
     }
-    if(val % 2 != 0){
+    if(val % 2 == 0){
     int X1 = int(move[0]) - 97;
     int Y1 = (move[1] - '0') - 1;
     int X2 = int(move[2]) - 97;
