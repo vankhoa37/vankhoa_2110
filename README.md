@@ -26,16 +26,16 @@ Game gồm 3 phần:
 
 ## Source Code
 ### 4.1 Các hàm chung
-- **Board[8][8]:** Mảng lưu trữ giá trị các ô trong bàn cờ.
-- **loadPosition:** Load quân cờ lên bàn cờ từ ảnh.
-- **isPositionInsideRect:** Kiểm tra vị trí của chuột trong bàn cờ.
-- **isValidMove:** Kiểm tra nước đi có hợp lệ không.
-- **handlePieceMovement:** Di chuyển quân cờ (chưa hoàn thiện).
+- **Board[8][8]:** mỗi ô trong mảng này lưu trữ giá trị 1 ô trong bàn cờ, các quân cờ khác nhau sẽ có các giá trị khác nhau.
+- **loadPosition:** : hàm load các quân cờ lên bàn cờ, quân cờ sẽ được tải trong một ảnh figures, hàm này sẽ cắt các quân cờ trong ảnh theo giá trị của bảng board và load lên bàn cờ
+- **isPositionInsideRect:** hàm này kiểm tra xem chuột có trỏ đến 1 quân cờ trong bàn cờ hay không, trong chương trình nếu có sẽ thực hiện các bước điều chỉnh vị trí đến của quân cờ sao cho khớp với ô đến (không bị lệch hoặc quân cờ đứng giao nhiều ô)
+- **isValidMove:** : hàm kiểm tra nước đi có phải là đi hợp lệ không (các quân cờ nằm trong bàn cờ và quân cờ không thể có ô bắt đầu và ô kết thúc giống nhau)
+- **handlePieceMovement:** : hàm để di chuyển quân cờ theo chuột nhưng chưa làm được(bỏ đi cũng không ảnh hưởng gì đến code)
 - **isCastling:** Kiểm tra có thực hiện nhập thành không.
 - **castling:** Thực hiện nhập thành.
 
 ### 4.2 Các hàm riêng
-- **stokfishMove, stockFishMovePromote, x:** Xử lý nước đi từ dạng chữ sang bàn cờ.
+- **stokfishMove, stockFishMovePromote, x:** : thực hiện các chức năng xử lý nước đi từ dạng chữ để thể hiện lên bàn cờ bằng cách thay đổi giá trị của mảng board
 
 ### 4.3 Các file .hpp
 - **Connector1.hpp:** Kết nối với AI và nhận nước đi.
@@ -43,12 +43,11 @@ Game gồm 3 phần:
 - **chooseChessPromote.hpp:** Hiển thị bảng chọn quân cờ để phong cấp.
 - **suggest_printer.hpp:** In gợi ý lên màn hình cho người chơi.
 - **music.hpp:** Tạo âm thanh cho trò chơi.
-- **SDL2ImageRender:** Chuyển đổi ảnh để tạo menu.
+- **SDL2ImageRender:** Thực hiện việc chuyển đổi các ảnh để tạo menu dựa trên các ảnh có sẵn
 
 ## Tham khảo và Đồ họa
 ### 5.1 Tham khảo Code
-- **YTB FamTrinli:** Connector1.hpp (đã chỉnh sửa để phù hợp hơn).
-
+- **YTB FamTrinli:** Tham khảo phần connector1.hpp để kết nối với AI, đã chỉnh sửa để phù hợp hơn với chương trình
 ### 5.2 Đồ họa
 - **Bàn cờ và các quân cờ:** YTB FamTrinli.
 - **Menu ảnh:** Cap màn hình game Master Chess.
