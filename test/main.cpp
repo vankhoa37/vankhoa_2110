@@ -10,6 +10,7 @@
 #include "chess_quiz.cpp"
 #include "chess_quiz2.cpp"
 #include "chess_quiz3.cpp"
+#include "chess_quiz4.cpp"
 using namespace std;
 
 const int WINDOW_WIDTH = 1368;
@@ -123,6 +124,13 @@ int main(int argc, char* args[]) {
                     create = true;
                     ChessQuiz3 quiz;
                     quiz.run3(currentImageIndex);
+                }
+                else if (X >= 854 && X <= 1175 && Y >= 467 && Y <= 581 && (currentImageIndex == 4 || currentImageIndex == 5 )) {
+                    SDL_DestroyWindow(window2);
+                    SDL_DestroyRenderer(renderer2);
+                    create = true;
+                    ChessQuiz4 quiz;
+                    quiz.run(currentImageIndex);
                 }
             }
         }
