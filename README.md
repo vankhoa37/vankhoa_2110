@@ -3,11 +3,11 @@
 # Chess Game
 
 ## Demo
-- Xem Demo Game tại: [https://youtu.be/Jduux9_fKS8](https://youtu.be/Jduux9_fKS8)
+- Xem Demo Game và hướng dẫn chơi tại: [https://youtu.be/Jduux9_fKS8](https://youtu.be/Jduux9_fKS8)
 
 ## Hướng dẫn cách tải
 1. Tải game bao gồm source code tại: [https://github.com/vankhoa37/vankhoa_2110.git](https://github.com/vankhoa37/vankhoa_2110.git)
-2. Tải game không bao gồm source code: [https://drive.google.com/drive/folders/1Jbh6RKXlXDy81JDpAZotKmdrApRVKb5G?usp=drive_link](link driver)
+2. Tải game không bao gồm source code: [https://drive.google.com/drive/folders/14-CtgV05p1oCnXIVnAicSoCYwArJmDTb?usp=drive_link](https://drive.google.com/drive/folders/14-CtgV05p1oCnXIVnAicSoCYwArJmDTb?usp=drive_link)
 
 ## Cấu trúc Game
 Game gồm 3 phần:
@@ -54,5 +54,5 @@ Game gồm 3 phần:
 - **Bàn cờ và các quân cờ:** YTB FamTrinli.
 - **Menu ảnh:** Cap màn hình game Master Chess.
 - **Các hình ảnh khác:** Góp nhặt từ nhiều nguồn khác nhau.
-- **Âm thanh:** Chủ yếu từ fixabay.com.
+- **Âm thanh:** Chủ yếu lấy từ fixabay.com.
 
