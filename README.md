@@ -6,8 +6,8 @@
 - Xem Demo Game tại: [https://youtu.be/Jduux9_fKS8](https://youtu.be/Jduux9_fKS8)
 
 ## Hướng dẫn cách tải
-1. Tải game bao gồm source code tại: 
-2. Tải game không bao gồm source code: 
+1. Tải game bao gồm source code tại: [https://github.com/vankhoa37/vankhoa_2110.git](https://github.com/vankhoa37/vankhoa_2110.git)
+2. Tải game không bao gồm source code: [https://drive.google.com/drive/folders/1Jbh6RKXlXDy81JDpAZotKmdrApRVKb5G?usp=drive_link](link driver)
 
 ## Cấu trúc Game
 Game gồm 3 phần:
