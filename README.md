@@ -4,6 +4,7 @@
 
 ## Demo
 - Xem Demo Game và hướng dẫn chơi tại: [https://youtu.be/Jduux9_fKS8](https://youtu.be/Jduux9_fKS8)
+- Giới thiệu về Cấu trúc mã nguồn tại : [https://youtu.be/l73Dj8QEPrE](https://youtu.be/l73Dj8QEPrE) 
 
 ## Hướng dẫn cách tải
 1. Tải game bao gồm source code tại: [https://github.com/vankhoa37/vankhoa_2110.git](https://github.com/vankhoa37/vankhoa_2110.git)
